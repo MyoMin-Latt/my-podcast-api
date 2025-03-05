@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, DefaultValuePipe, Get, HttpException, HttpStatus, NotFoundException, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, DefaultValuePipe, Get, HttpException, HttpStatus, NotFoundException, Param, ParseIntPipe, Post, Query, ValidationPipe } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDto } from './dto/create-episode.dto';
 import { IsPositivePipe } from 'src/pipes/is-positive/is-positive.pipe';
@@ -42,7 +42,7 @@ export class EpisodesController {
     }
 
     @Post()
-    create(@Body() input: CreateEpisodeDto) {
+    create(@Body(ValidationPipe) input: CreateEpisodeDto) {
         console.log(input);
         return this.episodesService.create(input);
     }
