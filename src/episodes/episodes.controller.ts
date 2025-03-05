@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Query } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDto } from './dto/create-episode.dto';
 
@@ -30,7 +30,11 @@ export class EpisodesController {
         console.log(id);
         const episode = await this.episodesService.findOne(id);
         if (!episode) {
-            throw new Error('Episode not found');
+            // throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+            // throw new NotFoundException('User not found'); // 404
+            throw new BadRequestException('Invalid input'); // 400
+
+            // throw new Error('Episode not found');
         }
         return episode;
     }
