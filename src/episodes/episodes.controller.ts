@@ -1,6 +1,7 @@
-import { BadRequestException, Body, Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, DefaultValuePipe, Get, HttpException, HttpStatus, NotFoundException, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDto } from './dto/create-episode.dto';
+import { IsPositivePipe } from 'src/pipes/is-positive/is-positive.pipe';
 
 
 @Controller('episodes')
@@ -9,7 +10,8 @@ export class EpisodesController {
     ) { }
 
     @Get()
-    findAll(@Query('sort') sort: 'asc' | 'desc' = 'desc') {
+    findAll(@Query('sort') sort: 'asc' | 'desc' = 'desc',
+    @Query('limit', new DefaultValuePipe(100), ParseIntPipe, IsPositivePipe) limit: Number) {
         console.log(sort);
         return this.episodesService.findAll();
     }
