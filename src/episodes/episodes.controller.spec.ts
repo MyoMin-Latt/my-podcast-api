@@ -30,7 +30,7 @@ describe('EpisodesController', () => {
 
   describe('findOne', () => {
     describe('when episode is found', () => {
-      const episodeId = 'id';
+      const episodeId = '101';
       const mockResult = { id: episodeId, name: 'my episode' };
 
       beforeEach(() => {

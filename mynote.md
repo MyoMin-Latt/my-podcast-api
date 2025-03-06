@@ -7,6 +7,9 @@ nest generate service episodes
 
 nest g s config
 
+nest generate pipe pipes/is-positive
+
+nest generate guard guards/api-key
 
 
 
