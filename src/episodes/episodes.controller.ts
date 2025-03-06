@@ -18,7 +18,7 @@ export class EpisodesController {
     }
 
     @Get('featured')
-    findFeatured() {
+    async findFeatured() {
         return this.episodesService.findFeatured();
     }
 
